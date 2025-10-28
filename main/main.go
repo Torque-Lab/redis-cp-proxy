@@ -10,12 +10,14 @@ import (
 )
 
 func main() {
-
+	certPath := "/etc/ssl/certs/tls.crt"
+	keyPath := "/etc/ssl/certs/tls.key"
 	go control_plane.StartUpdateServer()
 	// TLS logic
-	cert, err := tls.LoadX509KeyPair("/etc/ssl/certs/wildcard.crt", "/etc/ssl/certs/wildcard.key")
+	cert, err := tls.LoadX509KeyPair(certPath, keyPath)
 	if err != nil {
 		log.Println("failed to load cert:", err)
+		return
 	}
 	tlsConfig := &tls.Config{
 		Certificates:             []tls.Certificate{cert},
