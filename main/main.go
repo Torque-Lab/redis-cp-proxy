@@ -4,10 +4,13 @@ import (
 	"crypto/tls"
 	"log"
 	"net"
+	"os"
 	"redis-cp-proxy/auth_pipe"
 	"redis-cp-proxy/control_plane"
 	"time"
 )
+
+var proxy_port = os.Getenv("PROXY_PORT")
 
 func main() {
 	certPath := "/etc/ssl/certs/tls.crt"
@@ -26,7 +29,7 @@ func main() {
 		PreferServerCipherSuites: true,
 	}
 
-	listener, err := net.Listen("tcp", ":6380")
+	listener, err := net.Listen("tcp", ":"+proxy_port)
 	if err != nil {
 		log.Fatal(err)
 	}

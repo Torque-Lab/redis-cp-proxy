@@ -16,6 +16,7 @@ var (
 	controlPlaneURL  = os.Getenv("CONTROL_PLANE_URL")
 )
 var auth_token = os.Getenv("AUTH_TOKEN")
+var proxy_plane_port = os.Getenv("PROXY_PLANE_PORT")
 
 // Call control plane API for user auth
 func GetBackendAddress(username, password string) (string, error) {
@@ -90,8 +91,8 @@ func StartUpdateServer() {
 	})
 
 	go func() {
-		fmt.Println("Update server listening on :9000")
-		if err := http.ListenAndServe(":9000", nil); err != nil {
+		fmt.Println("Update server listening on :" + proxy_plane_port)
+		if err := http.ListenAndServe(":"+proxy_plane_port, nil); err != nil {
 			fmt.Println("Update server error:", err)
 		}
 	}()
