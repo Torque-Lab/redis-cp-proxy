@@ -50,6 +50,10 @@ func HandleClient(client net.Conn) {
 		client.Write([]byte("-ERR invalid credentials\r\n"))
 		return
 	}
+	if backendAddr == "" {
+		client.Write([]byte("-ERR invalid credentials\r\n"))
+		return
+	}
 	backendConnRedis, err := net.Dial("tcp", backendAddr)
 	if err != nil {
 		client.Write([]byte("-ERR failed to connect backend\r\n"))
