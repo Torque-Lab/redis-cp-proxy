@@ -2,11 +2,13 @@ package main
 
 import (
 	"crypto/tls"
+	"fmt"
 	"log"
 	"net"
 	"os"
 	"redis-cp-proxy/auth_pipe"
 	"redis-cp-proxy/control_plane"
+	_ "redis-cp-proxy/env_config"
 	"time"
 )
 
@@ -33,6 +35,7 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
+	fmt.Printf("Listening on: %s\n", proxy_port)
 	tlsListener := tls.NewListener(listener, tlsConfig)
 
 	for {

@@ -53,7 +53,6 @@ func GetBackendAddress(username, password string) (string, error) {
 
 func StartUpdateServer() {
 	http.HandleFunc("/api/v1/infra/redis/update-table", func(w http.ResponseWriter, r *http.Request) {
-		fmt.Println("Update request received")
 		var req struct {
 			Message   string `json:"message"`
 			Success   bool   `json:"success"`
@@ -91,7 +90,7 @@ func StartUpdateServer() {
 	})
 
 	go func() {
-		fmt.Println("Update server listening on :" + proxy_plane_port)
+		fmt.Printf("Update server listening on :%s\n", proxy_plane_port)
 		if err := http.ListenAndServe(":"+proxy_plane_port, nil); err != nil {
 			fmt.Println("Update server error:", err)
 		}
