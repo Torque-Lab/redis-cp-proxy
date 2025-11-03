@@ -12,7 +12,7 @@ import (
 	"time"
 )
 
-var proxy_port = os.Getenv("PROXY_PORT")
+var proxy_port = os.Getenv("PROXY_PORT_REDIS")
 
 func main() {
 	certPath := "/etc/ssl/certs/tls.crt"
