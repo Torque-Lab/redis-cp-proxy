@@ -3,12 +3,12 @@ name: Build and Deploy Redis Gateway
 
 on:
   push:
-    paths:
-      - .github/workflows/redis-gatway.yaml
-      - 'docker/Dockerfile.redis-proxy'
-      - 'apps/redis-proxy/**'
     branches:
       - main
+    paths-ignore:
+      - '**/*.md'                 
+      - '.github/workflows/**'     
+      - '**/*.yml' 
 jobs:
   build:
     runs-on: ubuntu-latest
